@@ -1,0 +1,128 @@
+<html>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+  <script type="text/javascript" src="highcharts.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  
+  <body>
+  <div id="chart"></div>
+  <div id="input">
+    <div class="disp" id="manyPoints">
+      Add a bunch of points (json formatted list of lists):
+      <textarea class="block" id="jsonlist"></textarea>
+    </div>
+
+    <div class="disp" id="onePoint">
+      or add points individually:<br />
+      x coordinate<input type="text" id="x"> <br />
+      y coordinate<input type="text" id="y"> <br />
+      <button id="addPoint">Add point!</button>
+    </div>
+      
+    <div class="disp" id="randPoint">
+      <button class="block" id="addRandom">Add random point!</button>
+    </div>
+    
+    <div class="disp" id="saved">
+      Choose a saved schedule:
+      <select class="block" id="chooseSchedule">
+        <option value="s1">Schedule 1</option>
+        <option value="s2">Schedule 2</option>
+      </select>
+    </div>
+  </div>
+  
+  <div id="output">
+    Click to view schedule:
+    <textarea class="block" id="sched"></textarea>
+  </div>
+  
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+        var points = [[2,2], [18,10], [9,12],
+             [4,17], [4,3], [8,13], [19,11], [4,11], [3,4],
+             [6,8], [8,16], [9,15], [15,3], [9,3], [3,8],
+             [18,5], [14,12], [6,21], [13,6], [7,17], [12,21]];
+        
+        var points2 = points.map(function(pt) {return [pt[1] + 1, pt[0] - 1];});
+        
+        var scheds = {"s1" : points, "s2" : points2};
+        
+        
+        var chart = new Highcharts.Chart({
+            chart: {
+                type: 'scatter',
+                renderTo: 'chart'
+            },
+            
+            title: {
+                text: 'Sample schedule viewer'
+            },
+            
+            credits: {
+                enabled: false
+            },
+            
+            yAxis: {
+                min: 0,
+                max: 30,
+                title: {
+                    text: 'y increment'
+                },
+                gridLineWidth: 1
+            },
+            
+            xAxis: {
+                min: 0,
+                max: 30,
+                title: {
+                    text: 'x increment'
+                },
+                gridLineWidth: 1
+            },
+            
+            series: [
+                {name: 'sample schedule',
+                 data: []
+                }
+            ]
+        });
+        
+        $("#jsonlist").click(function() {
+            var myList = JSON.parse($("#jsonlist").val());
+            myList.map(function(pt) {
+                chart.series[0].addPoint(pt);
+            });
+        });
+        
+        $('#addRandom').click(function() {
+            chart.series[0].addPoint([Math.floor(Math.random() * 30),
+                                      Math.floor(Math.random() * 30)]);
+        });
+        
+        $("#addPoint").click(function() {
+            var x = parseInt($("#x").val());
+            var y = parseInt($("#y").val());
+            chart.series[0].addPoint([x, y]);
+        });
+        
+        $('#sched').click(function() {
+            var itsSeries = chart.series[0].data;
+            var mySeries = itsSeries.map(function(data) {
+                return [data.x, data.y];
+            });
+            var text = JSON.stringify(mySeries);
+            $("#sched").val(text);
+        });
+        
+        $('#chooseSchedule').change(function() {
+            chart.series[0].setData(scheds[$('#chooseSchedule').val()]);
+        }) . change();
+
+    });
+  </script>
+
+  
+  </body>
+  </html>
