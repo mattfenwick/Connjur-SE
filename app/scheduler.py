@@ -90,6 +90,22 @@ class GetSchedule(webapp.RequestHandler):
     for p in sched.points:
       s['points'].append({'location': p.location, 'phase': p.phase})
     self.response.out.write(simplejson.dumps(s))
+    
+class Full(webapp.RequestHandler):
+    def get(self):
+        scheds = db.GqlQuery("SELECT * FROM Schedule")
+        ids = []
+        for s in scheds:
+          ids.append(s.key().id())
+    
+        stuff = {'ids': ids}
+        path = os.path.join(os.path.dirname(__file__), 'scheduler.html')
+        self.response.out.write(template.render(path, stuff))
+        
+class View(webapp.RequestHandler):
+    def get(self):
+        path = os.path.join(os.path.dirname(__file__), 'viewSchedule.html')
+        self.response.out.write(template.render(path, {}))
 
 def main():
     app = webapp.WSGIApplication([('/',        Scheduler),
@@ -98,7 +114,9 @@ def main():
                                   ('/failure', Failure),
                                   ('/read',    Reader),
                                   ('/search',  Searcher),
-                                  ('/schedule',  GetSchedule)],
+                                  ('/schedule',  GetSchedule),
+                                  ('/full',      Full),
+                                  ('/view',      View)],
                                  debug=True)
     run_wsgi_app(app)
 

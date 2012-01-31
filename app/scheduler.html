@@ -1,0 +1,147 @@
+<html>
+
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script type="text/javascript" src="/scripts/highcharts.js"></script>
+<script type="text/javascript" src="/scripts/jquery.idTabs.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style1.css" />
+
+<body>
+
+
+  <div id="chart"></div>
+
+	<div id="tabs">
+		<ul class="idTabs">
+			<li><a href="#create">Create</a></li>
+			<li><a href="#load">Load</a></li>
+			<li><a href="#modify">Modify</a></li>
+			<li><a href="#read">Output</a></li>
+			<li><a href="#statistics">Analysis</a></li>
+		</ul>
+		
+		<div id="create">
+			<p>Tab 1 content</p>
+		</div>
+		
+		<div id="load">
+         <select id="chooseSched">
+          {% for id in ids %}
+           <option value="{{ id }}"> {{ id }} </option>
+          {% endfor %}
+         </select>
+		</div>
+
+		<div id="modify">
+			<div class="disp" id="manyPoints">
+				Add a bunch of points (json formatted list of lists):
+				<textarea class="block" id="addMany"></textarea>
+			</div>
+
+			<div class="disp" id="onePoint">
+				or add points individually:<br /> x coordinate<input type="text"
+					id="x"> <br /> y coordinate<input type="text" id="y">
+				<br />
+				<button id="addOne">Add point!</button>
+			</div>
+
+			<div class="disp" id="randomPoint">
+				<button class="block" id="addRandom">Add random point!</button>
+			</div>
+		</div>
+
+		<div id="read">
+			<p>Tab 4 content</p>
+		</div>
+		
+		<div id="statistics">
+			<p>Tab 5 content</p>
+		</div>
+	</div>
+	
+	
+  <script type="text/javascript">
+    $(document).ready(function() {
+        
+        $('#chooseSched').change(function() { 
+            var myid = $('#chooseSched').val();
+            $.getJSON('/schedule', {id: myid}, function(j) {
+              $("#sometext").text("author: " + j["author"] + 
+                   "   description: " + j["description"] + 
+                   "   id: " + j["id"]);
+              
+
+        var chart = new Highcharts.Chart({
+            chart: {
+                type: 'scatter',
+                renderTo: 'chart',
+                height: 500,
+                width: 500,
+            },
+            
+            title: {
+                text: 'Sample schedule viewer'
+            },
+            
+            credits: {
+                enabled: false
+            },
+            
+            yAxis: {
+                min: 0,
+                max: 100,
+                title: {
+                    text: 'y increment'
+                },
+                gridLineWidth: 1
+            },
+            
+            xAxis: {
+                min: 0,
+                max: 100,
+                title: {
+                    text: 'x increment'
+                },
+                gridLineWidth: 1
+            },
+            
+            series: [
+                {name: 'sample schedule',
+                 data: []
+                }
+            ]
+        });
+
+        var pts = j["points"];
+        var coords = pts.map(function(pt) { return pt["location"];});
+
+        chart.series[0].setData(coords);
+
+            });
+        }) . change();
+      
+    });
+    
+
+    
+    $("#addMany").click(function() {
+        var myList = JSON.parse($("#addMany").val());
+        myList.map(function(pt) {
+            chart.series[0].addPoint(pt);
+        });
+    });
+    
+    $('#addRandom').click(function() {
+        chart.series[0].addPoint([Math.floor(Math.random() * 30),
+                                  Math.floor(Math.random() * 30)]);
+    });
+    
+    $("#addOne").click(function() {
+        var x = parseInt($("#x").val());
+        var y = parseInt($("#y").val());
+        chart.series[0].addPoint([x, y]);
+    });
+  </script>
+</body>
+
+</html>
