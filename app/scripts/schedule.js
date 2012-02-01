@@ -22,4 +22,10 @@ function Schedule(chart) {
     this.getPoints = function() {
     	return this.points;
     }
+    
+    this.setPoints = function(pts) {
+    	this.points = [];
+    	this.chart.series[0].setData([]);
+    	pts.map(function(pt) {this.addPoint(pt); });
+    }
 }

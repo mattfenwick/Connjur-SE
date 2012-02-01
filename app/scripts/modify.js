@@ -21,10 +21,8 @@ function addModify(schedule) {
         schedule.addPoint([x, y]);
     });
 
-    $("#removeOne").click(function() {
-        var x = parseInt($("#x").val());
-        var y = parseInt($("#y").val());
-        schedule.removePoint([x, y]);
+    $("#removeAll").click(function() {
+        schedule.setPoints([]);
     });
 
 };
