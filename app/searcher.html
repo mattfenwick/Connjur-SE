@@ -25,53 +25,54 @@
                    "   id: " + j["id"]);
               
 
-        var chart = new Highcharts.Chart({
-            chart: {
-                type: 'scatter',
-                renderTo: 'chart',
-                height: 800,
-                width: 800,
-            },
-            
-            title: {
-                text: 'Sample schedule viewer'
-            },
-            
-            credits: {
-                enabled: false
-            },
-            
-            yAxis: {
-                min: 0,
-                max: 100,
-                title: {
-                    text: 'y increment'
-                },
-                gridLineWidth: 1
-            },
-            
-            xAxis: {
-                min: 0,
-                max: 100,
-                title: {
-                    text: 'x increment'
-                },
-                gridLineWidth: 1
-            },
-            
-            series: [
-                {name: 'sample schedule',
-                 data: []
-                }
-            ]
-        });
-
-        var pts = j["points"];
-        var coords = pts.map(function(pt) { return pt["location"];});
-
-        chart.series[0].setData(coords);
+		        var chart = new Highcharts.Chart({
+		            chart: {
+		                type: 'scatter',
+		                renderTo: 'chart',
+		                height: 800,
+		                width: 800,
+		            },
+		            
+		            title: {
+		                text: 'Sample schedule viewer'
+		            },
+		            
+		            credits: {
+		                enabled: false
+		            },
+		            
+		            yAxis: {
+		                min: 0,
+		                max: 100,
+		                title: {
+		                    text: 'y increment'
+		                },
+		                gridLineWidth: 1
+		            },
+		            
+		            xAxis: {
+		                min: 0,
+		                max: 100,
+		                title: {
+		                    text: 'x increment'
+		                },
+		                gridLineWidth: 1
+		            },
+		            
+		            series: [
+		                {name: 'sample schedule',
+		                 data: []
+		                }
+		            ]
+		        });
+	
+		        var pts = j["points"];
+		        var coords = pts.map(function(pt) { return pt["location"];});
+		
+		        chart.series[0].setData(coords);
 
             });
+            
         }) . change();
       
     });
