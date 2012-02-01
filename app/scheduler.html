@@ -1,10 +1,17 @@
 <html>
 
-<script type="text/javascript"
-    src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script type="text/javascript" src="/scripts/highcharts.js"></script>
-<script type="text/javascript" src="/scripts/jquery.idTabs.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/stylesheets/style1.css" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/scripts/highcharts.js"></script>
+	<script type="text/javascript" src="/scripts/jquery.idTabs.min.js"></script>
+	<script type="text/javascript" src="/scripts/modify.js"></script>
+	<script type="text/javascript" src="/scripts/schedule.js"></script>
+	<script type="text/javascript" src="/scripts/output.js"></script>
+	<script type="text/javascript" src="/scripts/load.js"></script>
+	<script type="text/javascript" src="/scripts/create.js"></script>
+	<script type="text/javascript" src="/scripts/save.js"></script>
+	<script type="text/javascript" src="/scripts/statistics.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style1.css" />
 
 <body>
 
@@ -18,10 +25,11 @@
             <li><a href="#modify">Modify</a></li>
             <li><a href="#read">Output</a></li>
             <li><a href="#statistics">Analysis</a></li>
+            <li><a href="#save">Save</a></li>
         </ul>
         
         <div id="create">
-            <p>Tab 1 content</p>
+            <button id="createRandom">Create random schedule</button>
         </div>
         
         <div id="load">
@@ -73,6 +81,12 @@
            <li>Min, Max y</li>
           </ul>
         </div>
+        
+        <div id="save">
+          <button id="saveSchedule">Save schedule to DataStore</button>
+           Author:<textarea id="author"></textarea>
+           Description:<textarea id="description"></textarea>
+        </div>
 
     </div>
     
@@ -81,7 +95,7 @@
     $(document).ready(function() {
 
         ////////////////////
-        // create 'global' chart variable
+        // create 'global' chart and schedule variables 
         ////////////////////
         var chart = new Highcharts.Chart({
             chart: {
@@ -123,67 +137,22 @@
                 }
             ]
         });
+        
+        var schedule = new Schedule(chart);
         ///////////////////////////////
+                
+        addLoad(schedule);   // from /scripts/load.js 
         
+        addCreate(schedule); // from /scripts/create.js 
+
+        addModify(schedule); // from /scripts/modify.js 
+
+        addOutput(schedule); // from /scripts/output.js 
         
-        ///////////////////////////////
-        // behavior for "load" tab
-        ///////////////////////////////
-        $('#chooseSched').change(function() { 
-            var myid = $('#chooseSched').val();
-            $.getJSON('/schedule', {id: myid}, function(j) {
-                // TODO dump the points into the chart
-                //    is j an object or an array?
-            });
-        });
-        ///////////////////////////////
-              
-
-        //////////////////////
-        // behavior for "modify" tab
-        //////////////////////
-        $("#addMany").click(function() {
-            // TODO check to make sure list of pairs of positive ints
-            var myList = JSON.parse($("#addMany").val());
-            myList.map(function(pt) {
-                chart.series[0].addPoint(pt);
-            });
-        });
+        addStatistics(schedule); // from /scripts/statistics.js 
         
-        $('#addRandom').click(function() {
-            chart.series[0].addPoint([Math.floor(Math.random() * 30),
-                                      Math.floor(Math.random() * 30)]);
-        });
-        
-        $("#addOne").click(function() {
-            var x = parseInt($("#x").val());
-            var y = parseInt($("#y").val());
-            chart.series[0].addPoint([x, y]);
-        });
+        addSave(schedule);   // from /scripts/save.js 
 
-        $("#removeOne").click(function() {
-            // TODO finish
-        });
-        //////////////////////////
-
-
-        //////////////////////
-        // behavior for "read" tab
-        //////////////////////
-        $("#outputFormat").click(function() {
-            var points = chart.series[0];
-            $("#scheduleOut").val("sometext"); // TODO find function and call it
-        });
-        //////////////////////
-        
-
-        //////////////////////
-        // behavior for "statistics" tab
-        //////////////////////
-        $("#refreshStatistics").click(function() {
-            // TODO complete
-        });
-        //////////////////////
     });
     
   </script>
