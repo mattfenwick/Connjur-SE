@@ -1,14 +1,14 @@
 
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
-from handlers import Scheduler, GetSchedule, Full
+from handlers import ScheduleEngine, GetSchedule, SaveSchedule
 
         
 
 def main():
-    app = webapp.WSGIApplication([('/',              Scheduler),     # for full sample scheduler engine
-                                  ('/saveschedule',  SaveSchedule),  # for saving schedules (by post)
-                                  ('/getschedule',   GetSchedule)],  # for ajax schedule requests
+    app = webapp.WSGIApplication([('/',              ScheduleEngine),  # for full sample scheduler engine
+                                  ('/saveschedule',  SaveSchedule),    # for saving schedules (by post)
+                                  ('/getschedule',   GetSchedule)],    # for ajax schedule requests
                                  debug=True)
     run_wsgi_app(app)
 
