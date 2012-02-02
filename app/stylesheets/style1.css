@@ -1,44 +1,66 @@
+
 body{
 	background-color: #000;
 	color: white;
 }
 
+#chart {
+	float: left;
+	width: 48%;
+	height: 95%;
+	margin: 10px 10px;
+	outline: red auto 2px;/**/
+}
+
 /* Style for tabs */
 #tabs {
-  background:#181818;
-  color:#111;
-  padding:15px 20px;
-  width:500px;
-  border:1px solid #222;
-  margin:8px auto;
+	float: right;
+	outline: red auto 2px;/**/
+    background:#181818;
+    color:#111;
+    width: 48%;
+    height: 95%;
+    margin: 10px 10px;
 }
-#tabs > li, #tabs > ul > li { list-style:none; float:left; }
+
+#tabs > li, #tabs > ul > li { 
+	list-style:none; 
+	float:left; 
+}
+
 #tabs ul a {
-  display:block;
-  padding:6px 10px;
-  text-decoration:none!important;
-  margin:1px;
-  margin-left:0;
-  color:#FFF;
-  background:#444;
+    display:block;
+    padding:6px 10px;
+    text-decoration:none!important;
+    margin:1px;
+    margin-left:0;
+    color:#FFF;
+    background:#444;
 }
+
 #tabs ul a:hover {
-  color:#FFF;
-  background:#111;
-  }
-#tabs ul a.selected {
-  margin-bottom:0;
-  color:#000;
-  background:snow;
-  border-bottom:1px solid snow;
-  cursor:default;
-  }
-#tabs > div {
-  padding:10px 10px 8px 10px;
-  *padding-top:3px;
-  *margin-top:-15px;
-  clear:left;
-  background:snow;
-  height: 300px ;
+    color:#FFF;
+    background:#111;
 }
-#tabs div a { color:#000; font-weight:bold; }
+
+#tabs ul a.selected {
+    margin-bottom:0;
+    color:#000;
+    background:white;
+    border-bottom:1px solid white;
+    cursor:default;
+}
+
+#tabs > div {
+    padding:10px 10px 8px 10px;
+    padding-top:3px;
+    margin-top:-15px;
+    clear:left;
+    background:white;
+    height: 300px ;
+}
+
+#tabs div a { 
+	color:#000; 
+	font-weight:bold; 
+}
