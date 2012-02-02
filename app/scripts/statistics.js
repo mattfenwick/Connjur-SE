@@ -1,3 +1,18 @@
+function averagePoints(schedule) {	
+                var points = schedule.getPoints();
+                var x=0;
+                var y=0;
+		for (var i = 0; i < points.length; i++) {
+	         	x += points[i][0] ;
+                 	y += points[i][1] ;
+		}
+                avX = x/points.length;
+                avY = y/points.length;
+return [avX, avY] ;
+}
+
+
+var colbertsfunctions = [averagePoints];
 
 function addStatistics(schedule) {
 	
