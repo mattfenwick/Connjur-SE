@@ -6,7 +6,7 @@ function addModify(schedule) {
         // TODO check to make sure list of pairs of positive ints
         var myList = JSON.parse($("#addMany").val());
         myList.map(function(pt) {
-            schedule.addPoint(pt);
+            schedule.addPoint(pt); // TODO error-handling
         });
     });
 

@@ -11,7 +11,7 @@ function Schedule(chart) {
     // add the point to the model, AND to the chart
     this.addPoint = function(pt) {
     	if(this.points.length > 0) {
-    		if(!this.points[0].length === pt.length) {
+    		if(this.points[0].length != pt.length) {
     			throw new Error("point of bad dimensionality added");
     		}
     	}
