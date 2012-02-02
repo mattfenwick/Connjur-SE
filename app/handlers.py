@@ -9,10 +9,25 @@ from google.appengine.ext import webapp
 
 class SaveSchedule(webapp.RequestHandler):
     def post(self):
+        a, d = self.request.get('author'), self.request.get('description')  # error: missing either key
+        text = ""
+        #try:
+        schedString = self.request.get('schedulestring')   # error: missing parameter
+        jsonSched = simplejson.loads(schedString)          # error: bad json
+        
+        s = Schedule(auth = a, desc = d)
+        s.put()                                            # error: some puts succeed while others fail
+        text += "saved schedule"
+        for pt in jsonSched["points"]:                     # error: not an object, or no "points" key
+            p = Point(sched = s, location = map(int, pt), phase = ['R', 'R'])  # error:  setting all phases to RR
+            p.put()                                        # error: some puts succeed while others fail
+            text += "saved point"
         # schedule should be post-ed as json string
         # so parse the string into Schedule's and Point's, then save it 
         #   (check out previous versions of scheduler.py for examples of saving)
-        pass
+        self.response.out.write('<html><body>Schedule was successfully saved!</body></html>') # maybe add the schedule's id?
+        #except Exception, e:
+        #    self.response.out.write('<html><body>error: ' + e.message + str(a) + str(d) + text + '</body></html>')
 
 
 class GetSchedule(webapp.RequestHandler):
