@@ -31,7 +31,7 @@ formats = {
 
 function addOutput(schedule) {
 
-    $("#outputFormat").change(function() {
+    $("#viewText").click(function() {
     	var format = $("#outputFormat").val();
     	var func = formats[format];
         var formatted = func(schedule.getPoints().sort()); // TODO sort numerically

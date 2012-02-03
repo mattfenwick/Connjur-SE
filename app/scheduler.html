@@ -23,7 +23,7 @@
             <li><a href="#create">Create</a></li>
             <li><a href="#load">Load</a></li>
             <li><a href="#modify">Modify</a></li>
-            <li><a href="#read">Output</a></li>
+            <li><a href="#output">Output</a></li>
             <li><a href="#statistics">Analysis</a></li>
             <li><a href="#save">Save</a></li>
         </ul>
@@ -67,15 +67,18 @@
             </div>
         </div>
 
-        <div id="read">
-          <div class="simplewidget" id="output">
-           Select format:
-           <select id="outputFormat">
-            <option value="Bruker">Bruker</option>
-            <option value="Toolkit">Toolkit</option>
-            <option value="JSON">JSON</option>
-            <option value="Varian">Varian</option>
-           </select>
+        <div id="output">
+          <div class="simplewidget">
+           <button class="clearleft" id="viewText">View schedule text</button>
+           <div class="clearleft">
+            Select format:
+            <select id="outputFormat">
+             <option value="Bruker">Bruker</option>
+             <option value="Toolkit">Toolkit</option>
+             <option value="JSON">JSON</option>
+             <option value="Varian">Varian</option>
+            </select>
+           </div>
            <textarea class="block" id="scheduleOut"></textarea>
           </div>
         </div>

@@ -71,3 +71,12 @@ body{
 	margin: 5px;
 }
 
+.clearleft {
+	clear: left;
+}
+
+#scheduleOut {
+	height: 90%;
+}
+
+
