@@ -11,8 +11,8 @@ function addModify(schedule) {
     });
 
     $('#addRandom').click(function() {
-        schedule.addPoint([Math.floor(Math.random() * 30),
-                           Math.floor(Math.random() * 30)]);
+        schedule.addPoint([Math.floor(Math.random() * 100) + 1,
+                           Math.floor(Math.random() * 100) + 1]);
     });
 
     $("#addOne").click(function() {

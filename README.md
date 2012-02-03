@@ -9,7 +9,7 @@ The CONNJUR-SE project is for creating, saving, sharing, and enhancing sample sc
  - provide a mechanism for creation, saving, and public dissemination of sample schedules
  - provide a software integration platform for easily combining algorithms for creation of sample schedules, including time increment selection, quadrature, and transient selection
  - provide rapid feedback on the quality of sample schedules through a battery of statistical analysis functions
- - provide a rich and rewarding user experience through the application of cutting edge Web technologies
+ - provide a rich and rewarding user experience through the application of cutting-edge Web technologies
  
 ###Technologies used in the CONNJUR-SE Project:
 
