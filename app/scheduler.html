@@ -29,39 +29,46 @@
         </ul>
         
         <div id="create">
-            <button id="createRandom">Create random schedule</button>
+            <div class="simplewidget">
+              <button id="createRandom">Create random schedule</button>
+            </div>
         </div>
         
         <div id="load">
-         Search by schedule id:
-         <select id="chooseSched">
-          {% for id in ids %}
-           <option value="{{ id }}"> {{ id }} </option>
-          {% endfor %}
-         </select>
+         <div class="simplewidget">
+          Search by schedule id:
+          <select id="chooseSched">
+           {% for id in ids %}
+            <option value="{{ id }}"> {{ id }} </option>
+           {% endfor %}
+          </select>
+         </div>
         </div>
 
         <div id="modify">
-            <div class="disp" id="manyPoints">
-                Add a bunch of points (json formatted list of lists):
+            <div class="simplewidget" id="manyPoints">
+                Add many points (as a JSON-formatted list of lists):
                 <textarea class="block" id="addMany"></textarea>
             </div>
 
-            <div class="disp" id="onePoint">
+            <div class="simplewidget" id="onePoint">
                 or add points individually:<br /> 
                 x coordinate<input type="text" id="x"> <br /> 
                 y coordinate<input type="text" id="y"> <br />
-                <button id="addOne">Add point!</button> <br />
-                <button id="removeAll">Remove all points</button> <br />                
+                <button id="addOne">Add point!</button>
+            </div>
+            
+            <div class="simplewidget">
+                <button id="removeAll">Remove all points</button>
             </div>
 
-            <div class="disp" id="randomPoint">
+            <div class="simplewidget" id="randomPoint">
                 <button class="block" id="addRandom">Add random point!</button>
             </div>
         </div>
 
         <div id="read">
-          <div id="output">
+          <div class="simplewidget" id="output">
            Select format:
            <select id="outputFormat">
             <option value="Bruker">Bruker</option>
@@ -74,19 +81,27 @@
         </div>
         
         <div id="statistics">
-          <button id="refreshStatistics">Recalculate statistics</button>
-          <ul id="statsOutput">
-           <li>Grid point coverage (%)</li>
-           <li>Total time units</li>
-           <li>Min, Max x</li>
-           <li>Min, Max y</li>
-          </ul>
+          <div class="simplewidget">
+           <button id="refreshStatistics">Recalculate statistics</button>
+           <ul id="statsOutput">
+            <li>Grid point coverage (%)</li>
+            <li>Total time units</li>
+            <li>Min, Max x</li>
+            <li>Min, Max y</li>
+           </ul>
+          </div>
         </div>
         
         <div id="save">
-          <button id="saveSchedule">Save schedule to DataStore</button>
-           Author:<textarea id="author"></textarea>
-           Description:<textarea id="description"></textarea>
+          <div class="simplewidget">
+            <button id="saveSchedule">Save schedule to DataStore</button>
+          </div>
+          <div class="simplewidget">
+            Author:<textarea id="author"></textarea>
+          </div>
+          <div class="simplewidget">
+            Description:<textarea id="description"></textarea>
+          </div>
         </div>
 
     </div>
@@ -102,8 +117,6 @@
             chart: {
                 type: 'scatter',
                 renderTo: 'chart',
-                height: 700,
-                width: 750,
             },
             
             title: {

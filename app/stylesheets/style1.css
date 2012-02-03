@@ -8,7 +8,7 @@ body{
 	float: left;
 	width: 48%;
 	height: 95%;
-	margin: 10px 10px;
+	margin: 2px 2px;
 	outline: red auto 2px;/**/
 }
 
@@ -20,7 +20,7 @@ body{
     color:#111;
     width: 48%;
     height: 95%;
-    margin: 10px 10px;
+    margin: 2px 2px;
 }
 
 #tabs > li, #tabs > ul > li { 
@@ -57,10 +57,17 @@ body{
     margin-top:-15px;
     clear:left;
     background:white;
-    height: 300px ;
+    height: 90% ;
 }
 
 #tabs div a { 
 	color:#000; 
 	font-weight:bold; 
 }
+
+.simplewidget {
+	border: 2px solid gray;
+	padding: 5px;
+	margin: 5px;
+}
+
