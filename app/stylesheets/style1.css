@@ -76,7 +76,7 @@ html, body {
 	clear: left;
 }
 
-#scheduleOut {
+#scheduleOut, #output > div {
 	height: 90%;
 }
 
