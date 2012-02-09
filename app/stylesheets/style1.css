@@ -80,4 +80,8 @@ html, body {
 	height: 90%;
 }
 
+table, tr {
+	border: 2px solid black;
+}
+
 

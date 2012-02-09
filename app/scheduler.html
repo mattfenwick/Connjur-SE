@@ -6,18 +6,18 @@
     <meta name="keywords" content="CONNJUR, NMR, non-uniform" />
     <meta name="author" content="Matt Fenwick" />
     
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/scripts/highcharts.js"></script>
-	<script type="text/javascript" src="/scripts/jquery.idTabs.min.js"></script>
-	<script type="text/javascript" src="/scripts/modify.js"></script>
-	<script type="text/javascript" src="/scripts/schedule.js"></script>
-	<script type="text/javascript" src="/scripts/output.js"></script>
-	<script type="text/javascript" src="/scripts/load.js"></script>
-	<script type="text/javascript" src="/scripts/create.js"></script>
-	<script type="text/javascript" src="/scripts/save.js"></script>
-	<script type="text/javascript" src="/scripts/statistics.js"></script>
-	
-	<link rel="stylesheet" type="text/css" href="/stylesheets/style1.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/scripts/highcharts.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.idTabs.min.js"></script>
+    <script type="text/javascript" src="/scripts/modify.js"></script>
+    <script type="text/javascript" src="/scripts/schedule.js"></script>
+    <script type="text/javascript" src="/scripts/output.js"></script>
+    <script type="text/javascript" src="/scripts/load.js"></script>
+    <script type="text/javascript" src="/scripts/create.js"></script>
+    <script type="text/javascript" src="/scripts/save.js"></script>
+    <script type="text/javascript" src="/scripts/statistics.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style1.css" />
 </head>
   <body>
 
@@ -39,7 +39,8 @@
             <div class="simplewidget">
               <button id="createRandom">Create random schedule</button>
             </div>
-            <table id="createoptions">Dimension-specific options
+            <table id="createoptions">
+              <caption>Dimension-specific options</caption>
               <tr><th>Parameter</th><th>Dimension 1</th><th>Dimension 2</th></tr>
               <tr>
                 <td>Maximum increment</td>
@@ -47,7 +48,8 @@
                 <td><input type="number" /></td>
               </tr>
             </table>
-            <table>Other options
+            <table>
+              <caption>Other options</caption>
               <tr><th>Parameter</th><th>Value</th></tr>
               <tr>
                 <td>Number of points</td>
@@ -115,13 +117,13 @@
                 y coordinate<input type="text" id="y"> <br />
                 <button id="addOne">Add point!</button>
             </div>
-            
-            <div class="simplewidget">
-                <button id="removeAll">Remove all points</button>
-            </div>
 
             <div class="simplewidget" id="randomPoint">
                 <button class="block" id="addRandom">Add random point!</button>
+            </div>
+            
+            <div class="simplewidget">
+                <button id="removeAll">Remove all points</button>
             </div>
         </div>
 
@@ -184,7 +186,20 @@
     
     <script type="text/javascript">
     $(document).ready(function() {
+        
+        var schedule;
 
+        function clickChart(event) {
+            var cs = [Math.floor(event.xAxis[0].value),
+                      Math.floor(event.yAxis[0].value)];
+            schedule.addPoint(cs);
+        }
+        
+        function clickPoint(event) {
+        	alert("remove point is not implemented!");
+//            this.remove();
+        }
+        
         ////////////////////
         // create 'global' chart and schedule variables 
         ////////////////////
@@ -192,6 +207,9 @@
             chart: {
                 type: 'scatter',
                 renderTo: 'chart',
+                events: {
+                    click: clickChart
+                }
             },
             
             title: {
@@ -222,12 +240,16 @@
             
             series: [
                 {name: 'sample schedule',
-                 data: []
-                }
-            ]
+                 data: [],
+                 point: {
+                     events: {
+                         click: clickPoint
+                     }
+                 }
+            }]
         });
         
-        var schedule = new Schedule(chart);
+        schedule = new Schedule(chart);
         ///////////////////////////////
                 
         addLoad(schedule);   // from /scripts/load.js 
