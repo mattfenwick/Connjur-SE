@@ -4,7 +4,7 @@ function addModify(schedule) {
 
     $("#addMany").click(function() {
         // TODO check to make sure list of pairs of positive ints
-        var myList = JSON.parse($("#addMany").val());
+        var myList = JSON.parse($("#manyPoints").val());
         myList.map(function(pt) {
             schedule.addPoint(pt); // TODO error-handling
         });

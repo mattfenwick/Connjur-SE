@@ -39,6 +39,56 @@
             <div class="simplewidget">
               <button id="createRandom">Create random schedule</button>
             </div>
+            <table id="createoptions">Dimension-specific options
+              <tr><th>Parameter</th><th>Dimension 1</th><th>Dimension 2</th></tr>
+              <tr>
+                <td>Maximum increment</td>
+                <td><input type="number"/></td>
+                <td><input type="number" /></td>
+              </tr>
+            </table>
+            <table>Other options
+              <tr><th>Parameter</th><th>Value</th></tr>
+              <tr>
+                <td>Number of points</td>
+                <td><input type="number" /></td>
+              </tr>
+              <tr>
+                <td>Random seed</td>
+                <td><input type="number"/></td>
+              </tr>
+              <tr>
+                <td>Coordinate generation</td>
+                <td>
+                  <select>
+                    <option>All (uniform grid)</option>
+                    <option>Halton sub-random</option>
+                    <option>Radial</option>
+                    <option>Spiral</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>Quadrature</td>
+                <td>
+                  <select>
+                    <option>All</option>
+                    <option>Multiple random</option>
+                    <option>Single random</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>Point selection</td>
+                <td>
+                  <select>
+                    <option>All</option>
+                    <option>Random</option>
+                    <option>Pseudo-exponential</option>
+                  </select>
+                </td>
+              </tr>
+            </table>
         </div>
         
         <div id="load">
@@ -53,9 +103,10 @@
         </div>
 
         <div id="modify">
-            <div class="simplewidget" id="manyPoints">
+            <div class="simplewidget">
                 Add many points (as a JSON-formatted list of lists):
-                <textarea class="block" id="addMany"></textarea>
+                <textarea class="block" id="manyPoints"></textarea>
+                <button id="addMany">Add points!</button>
             </div>
 
             <div class="simplewidget" id="onePoint">
