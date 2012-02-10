@@ -59,6 +59,7 @@ html, body {
     clear:left;
     background:white;
     height: 90% ;
+    overflow: auto;
 }
 
 #tabs div a { 
