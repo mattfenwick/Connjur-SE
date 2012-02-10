@@ -14,9 +14,10 @@ The CONNJUR-SE project is for creating, saving, sharing, and enhancing sample sc
 ###Technologies used in the CONNJUR-SE Project:
 
  - jQuery
+ - jQueryui
  - javascript
- - HTML
+ - HTML5
  - CSS
  - python2.5
- - GoogleAppEngine
+ - GoogleAppEngine (python2.5 version)
  - Google DataStore
