@@ -16,8 +16,8 @@ function addModify(schedule) {
     });
 
     $("#addOne").click(function() {
-        var x = parseInt($("#x").val());
-        var y = parseInt($("#y").val());
+        var x = parseInt($("#x").val(), 10);
+        var y = parseInt($("#y").val(), 10);
         schedule.addPoint([x, y]);
     });
 
