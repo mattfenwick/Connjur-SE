@@ -1,0 +1,71 @@
+<!DOCTYPE html5>
+<html>
+<head>
+  <script type="text/javascript" src="/scripts/jquery.1.6.1.min.js"></script>
+  <link rel="stylesheet" href="/stylesheets/qunit.css" type="text/css" media="screen" />
+  <script type="text/javascript" src="/scripts/qunit.js"></script>
+  <script type="text/javascript" src="/scripts/statistics.js"></script>
+
+  <script>
+  $(document).ready(function(){
+    
+    test("a basic test example", function() {
+      ok( true, "this test is fine" );
+      var value = "hello";
+      equal( value, "hello", "We expect value to be hello" );
+    });
+    
+    module("Module A");
+    
+    test("first test within module", function() {
+      ok( true, "all pass" );
+    });
+    
+    test("second test within module", function() {
+      ok( true, "all pass" );
+    });
+    
+    module("Module B");
+    
+    test("some other test", function() {
+      expect(2);
+      equal( true, false, "failing test" );
+      equal( true, true, "passing test" );
+    });
+    
+    module("statistics");
+    
+    test("minimums", function() {
+    	expect(2);
+    	var data = [[10,20], [3,4], [5,6], [2,18], [18, 1]];
+    	var mymins = mins(data);
+    	equal(2, mymins[0]);
+    	equal(1, mymins[1]);
+    });
+    
+    test("maximums", function() {
+    	expect(2);
+    	var data = [[10,20], [3,4], [967,6], [2,18], [18, 1]];
+    	var mymaxes = maxes(data);
+    	equal(967, mymaxes[0]);
+    	equal(20, mymaxes[1]);
+    });
+    
+    test("total points", function() {
+    	var data = [[10,20], [3,4], [967,6], [2,18], [18, 1]];
+    	equal(5, totalPoints(data));
+    });
+
+  });
+  </script>
+  
+</head>
+<body>
+  <h1 id="qunit-header">QUnit example</h1>
+ <h2 id="qunit-banner"></h2>
+ <div id="qunit-testrunner-toolbar"></div>
+ <h2 id="qunit-userAgent"></h2>
+ <ol id="qunit-tests"></ol>
+ <div id="qunit-fixture">test markup, will be hidden</div>
+</body>
+</html>
