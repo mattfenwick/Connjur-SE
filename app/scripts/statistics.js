@@ -1,6 +1,5 @@
 
-function averageCoordinates(schedule) {    
-    var points = schedule.getPoints();
+function averageCoordinates(points) {    
     var xtotal = 0;
     var ytotal = 0;
     for(var i = 0; i < points.length; i++) {
@@ -11,28 +10,28 @@ function averageCoordinates(schedule) {
     return [xtotal / len, ytotal / len];
 }
 
-function maxes(schedule) {
+function maxes(points) {
 	var xs = [];
 	var ys = [];
-	schedule.getPoints().map(function(pt) {xs.push(pt[0]); ys.push(pt[1]);});
+	points.map(function(pt) {xs.push(pt[0]); ys.push(pt[1]);});
 	return [Math.max.apply(null, xs), Math.max.apply(null, ys)];
 }
 
-function mins(schedule) {
+function mins(points) {
 	var xs = [];
 	var ys = [];
-	schedule.getPoints().map(function(pt) {xs.push(pt[0]); ys.push(pt[1]);});
+	points.map(function(pt) {xs.push(pt[0]); ys.push(pt[1]);});
 	return [Math.min.apply(null, xs), Math.min.apply(null, ys)];
 }
 
-function totalPoints(schedule) {
-	return schedule.getPoints().length;
+function totalPoints(points) {
+	return points.length;
 }
 
-function gridCoverage(schedule) {
-	var mincs = mins(schedule);
-	var maxcs = maxes(schedule);
-	var tps = totalPoints(schedule);
+function gridCoverage(points) {
+	var mincs = mins(points);
+	var maxcs = maxes(points);
+	var tps = totalPoints(points);
 	return (100 * tps) / ((maxcs[0] - mincs[0] + 1) * (maxcs[1] - mincs[1] + 1));
 }
 
@@ -53,7 +52,7 @@ function addStatistics(schedule) {
         for(var key in statsFuncs) {
             var f = statsFuncs[key];
             // write a new element to the ul
-            $("#statsOutput").append("<li>" + key + ": " + f(schedule) + "</li>");
+            $("#statsOutput").append("<li>" + key + ": " + f(schedule.getPoints()) + "</li>");
         }
     });
 }

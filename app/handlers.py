@@ -50,3 +50,9 @@ class ScheduleEngine(webapp.RequestHandler):
         stuff = {'ids': ids}
         path = os.path.join(os.path.dirname(__file__), 'scheduler.html')
         self.response.out.write(template.render(path, stuff))
+        
+        
+class Tester(webapp.RequestHandler):
+    def get(self):
+        path = os.path.join(os.path.dirname(__file__), 'test.html')
+        self.response.out.write(template.render(path, {}))
