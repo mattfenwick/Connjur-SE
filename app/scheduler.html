@@ -289,7 +289,8 @@
 
         addOutput(schedule); // from /scripts/output.js 
         
-        addStatistics(schedule); // from /scripts/statistics.js 
+        var stats = Stats($);
+        stats.addStatistics(schedule); // from /scripts/statistics.js 
         
         addSave(schedule);   // from /scripts/save.js 
 
