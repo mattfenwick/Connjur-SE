@@ -9,36 +9,14 @@
   <script>
   $(document).ready(function(){
     
-    test("a basic test example", function() {
-      ok( true, "this test is fine" );
-      var value = "hello";
-      equal( value, "hello", "We expect value to be hello" );
-    });
-    
-    module("Module A");
-    
-    test("first test within module", function() {
-      ok( true, "all pass" );
-    });
-    
-    test("second test within module", function() {
-      ok( true, "all pass" );
-    });
-    
-    module("Module B");
-    
-    test("some other test", function() {
-      expect(2);
-      equal( true, false, "failing test" );
-      equal( true, true, "passing test" );
-    });
-    
     module("statistics");
+    
+    var stats = Stats($);
     
     test("minimums", function() {
     	expect(2);
     	var data = [[10,20], [3,4], [5,6], [2,18], [18, 1]];
-    	var mymins = mins(data);
+    	var mymins = stats.mins(data);
     	equal(2, mymins[0]);
     	equal(1, mymins[1]);
     });
@@ -46,14 +24,27 @@
     test("maximums", function() {
     	expect(2);
     	var data = [[10,20], [3,4], [967,6], [2,18], [18, 1]];
-    	var mymaxes = maxes(data);
+    	var mymaxes = stats.maxes(data);
     	equal(967, mymaxes[0]);
     	equal(20, mymaxes[1]);
     });
     
     test("total points", function() {
     	var data = [[10,20], [3,4], [967,6], [2,18], [18, 1]];
-    	equal(5, totalPoints(data));
+    	equal(5, stats.totalPoints(data));
+    });
+    
+    test("grid coverage", function() {
+    	var data = [[10,20], [3,4], [32,6], [2,18], [18, 1]];
+    	ok(Math.abs(500 / 640 - stats.gridCoverage(data)) < 0.00001);
+    });
+    
+    test("average coordinates", function() {
+    	var data = [[10,20], [3,4], [32,6], [2,18], [18, 1]];
+    	//(13, 9.8) 
+    	var acs = stats.averageCoordinates(data);
+    	ok(Math.abs(13 - acs[0]) < 0.000001, "x coordinates");
+    	ok(Math.abs(9.8 - acs[1]) < 0.000001, "y coordinates");
     });
 
   });
