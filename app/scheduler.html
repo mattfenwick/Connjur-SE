@@ -281,18 +281,23 @@
         schedule = new Schedule(chart);
         ///////////////////////////////
                 
-        addLoad(schedule);   // from /scripts/load.js 
+        var load = Load($, schedule);
+        load.addBehavior();   // from /scripts/load.js 
         
-        addCreate(schedule); // from /scripts/create.js 
+        var create = Create($, schedule);
+        create.addBehavior(); // from /scripts/create.js 
 
-        addModify(schedule); // from /scripts/modify.js 
+        var modify = Modify($, schedule);
+        modify.addBehavior(); // from /scripts/modify.js 
 
-        addOutput(schedule); // from /scripts/output.js 
+        var output = Output($, schedule);
+        output.addBehavior(); // from /scripts/output.js 
         
-        var stats = Stats($);
-        stats.addStatistics(schedule); // from /scripts/statistics.js 
+        var stats = Stats($, schedule);
+        stats.addBehavior(); // from /scripts/statistics.js 
         
-        addSave(schedule);   // from /scripts/save.js 
+        var save = Save($, schedule);
+        save.addBehavior();   // from /scripts/save.js 
 
     });
     

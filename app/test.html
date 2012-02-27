@@ -5,10 +5,19 @@
   <link rel="stylesheet" href="/stylesheets/qunit.css" type="text/css" media="screen" />
   <script type="text/javascript" src="/scripts/qunit.js"></script>
   <script type="text/javascript" src="/scripts/statistics.js"></script>
+  <script type="text/javascript" src="/scripts/output.js"></script>
+  <script type="text/javascript" src="/scripts/save.js"></script>
+  <script type="text/javascript" src="/scripts/load.js"></script>
+  <script type="text/javascript" src="/scripts/schedule.js"></script>
+  <script type="text/javascript" src="/scripts/create.js"></script>
+  <script type="text/javascript" src="/scripts/modify.js"></script>
 
   <script>
   $(document).ready(function(){
     
+	var schedule = new Schedule();// needs chart when initialized 
+	  
+	  
     module("statistics");
     
     var stats = Stats($);
@@ -46,13 +55,116 @@
     	ok(Math.abs(13 - acs[0]) < 0.000001, "x coordinates");
     	ok(Math.abs(9.8 - acs[1]) < 0.000001, "y coordinates");
     });
+    
+    test("has behavior function", function() {
+    	ok(stats.addBehavior);
+    });
+    
+    
+    
+    module("output");
+    
+    var output = Output($);
+    
+    test("toolkit format", function() {
+    	var data = [[10,20], [3,4], [32,6], [2,18], [18, 1]];
+    	var tk = output.toolkit(data);
+    	var lines = tk.split("\n");
+    	equal(5, lines.length, "number of lines");
+    });
+    
+    test("varian format", function() {
+    	var data = [[10,20], [3,4], [32,6], [2,18], [18, 1]];
+    	var vn = output.varian(data);
+    	var lines = vn.split("\n");
+    	equal(5, lines.length, "number of lines");
+    });
+    
+    test("bruker format", function() {
+    	var data = [[10,20], [3,4], [32,6], [2,18], [18, 1]];
+    	var bk = output.bruker(data);
+    	var lines = bk.split("\n");
+    	equal(5, lines.length, "number of lines");    	
+    });
+    
+    test("json format", function() {
+    	var data = [[10,20], [3,4], [32,6], [2,18], [18, 1]];
+    	var js = output.asJSON(data);
+    	var lines = JSON.parse(js);
+    	equal(5, lines.length, "number of points");    	
+    });
+    
+    test("has behavior function", function() {
+    	ok(output.addBehavior);
+    });
+    
+    
+    
+    module("save");
+    
+    var save = Save($);
+    
+    test("successful response", function() {
+        save.onSuccess({success: "a successful response"});
+    });
+
+    test("successful http request, error response", function() {
+        save.onSuccess({error: "an unsuccessful response"});
+    });
+
+    test("unsuccessful http request", function() {
+        save.onError("some string here");
+    });
+    
+    test("has behavior function", function() {
+    	ok(save.addBehavior);
+    });
+    
+    
+    
+    module("load");
+    
+    var load = Load($, schedule);
+    
+    test("successful response", function() {
+        load.onSuccess({points: [[1,2], [3,4]]});
+    });
+
+    test("unsuccessful http request", function() {
+        load.onError("some string here");
+    });
+    
+    test("has behavior function", function() {
+    	ok(load.addBehavior);
+    });
+    
+    
+    
+    module("create");
+    
+    var create = Create($, schedule);
+    
+    test("make random schedule", function() {
+    	create.createRandom();
+    	equal(100, schedule.getPoints().length, "number of points");
+    });
+    
+    
+    
+    module("modify");
+    
+    var modify = Modify($, schedule);
+    
+    test("add random point", function() {
+    	modify.addRandom();
+    });
 
   });
   </script>
   
 </head>
 <body>
-  <h1 id="qunit-header">QUnit example</h1>
+ <h1 id="qunit-header">QUnit example</h1>
  <h2 id="qunit-banner"></h2>
  <div id="qunit-testrunner-toolbar"></div>
  <h2 id="qunit-userAgent"></h2>

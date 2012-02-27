@@ -1,5 +1,5 @@
 
-function Stats($) {
+function Stats($, schedule) {
 
     var m = {
         averageCoordinates: function(points) {    
@@ -45,7 +45,7 @@ function Stats($) {
                       "% coverage":           m.gridCoverage
     };
     
-    m.addStatistics = function(schedule) {  
+    m.addBehavior = function() {  
         $("#refreshStatistics").click(function() {
             // get rid of the old content
             $("#statsOutput").empty();
