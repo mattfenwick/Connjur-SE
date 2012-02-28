@@ -12,15 +12,33 @@ def complex_fft(x):
     x_odd  = x[1::2]
     X_even = fft(x_even)
     X_odd  = fft(x_odd)
-    X = [0]*N                   # Allocate Zeros
-    M = N /2
+    X = [0]*N                   # Allocate Zeros    
     for k in range(M) :
         twiddle = math.e ** (2j * math.pi * k / N)
         X[k] = X_even[k] + X_odd[k] * twiddle
         X[M+k] = X_even[k] - X_odd[k] * twiddle   
     return X
 
-def fft(x):
-    complex_spectrum = complex_fft(x)
-    return map(abs, complex_spectrum)
-    
+def fft(x):   
+    if (complex_fft(x) == 0):
+        return "input data size not a power of two"       
+    return map(abs, complex_fft(x))
+
+def fft_test():
+    return fft([math.sin(x) for x in range(1024)])
+
+def nextPow2(num):     
+    for l in map(lambda x: num - x, [2**i for i in range(35)]):
+        if (l <= 0):    
+            return num - l  
+
+def parse(sched):
+    "input: sample schedule JSON format, outputs matrix
+    s = [[0]*nextPow2(max([x[0] for x in sched])) for l in range(nextPow2(max([x[1] for x in sched])))] 
+    for i in sched:        
+        s[i[1]-1] [i[0]-1] = 1   # point [x,y] = s[y][x]
+    return s   
+
+def fft2(x):
+    """ input: sample schedule JSON format, outputs matrix of the computed 2d fft"""  
+    return map(fft, map(list, zip(*map(fft, parse(x))) ) )
