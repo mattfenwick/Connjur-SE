@@ -25,7 +25,7 @@ function Modify($, schedule) {
         }
     };
     
-    function addBehavior() {
+    m.addBehavior = function() {
         $("#addMany").click(m.addMany);
         $('#addRandom').click(m.addRandom);
         $("#addOne").click(m.addOne);

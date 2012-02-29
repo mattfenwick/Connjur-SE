@@ -149,6 +149,10 @@
     	equal(100, schedule.getPoints().length, "number of points");
     });
     
+    test("has behavior function", function() {
+    	ok(create.addBehavior);
+    });
+    
     
     
     module("modify");
@@ -157,6 +161,10 @@
     
     test("add random point", function() {
     	modify.addRandom();
+    });
+    
+    test("has behavior function", function() {
+    	ok(modify.addBehavior);
     });
 
   });
