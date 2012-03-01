@@ -33,7 +33,7 @@ def nextPow2(num):
             return num - l  
 
 def parse(sched):
-    "input: sample schedule JSON format, outputs matrix
+    """input: sample schedule JSON format, outputs matrix"""
     s = [[0]*nextPow2(max([x[0] for x in sched])) for l in range(nextPow2(max([x[1] for x in sched])))] 
     for i in sched:        
         s[i[1]-1] [i[0]-1] = 1   # point [x,y] = s[y][x]
